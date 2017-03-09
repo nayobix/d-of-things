@@ -1,0 +1,2 @@
+*/5 *   * * *   /var/www/htdocs/d-of-things/scripts/middleware/middleware_check.sh > /var/log/middleware_check.log 2>&1
+*/5 *   * * *   /usr/bin/curl -k -u USERNAME:PASSWORD "https://localhost/alarms/notify/notifySecretKey" > /dev/null 2>&1

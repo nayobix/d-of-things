@@ -1,0 +1,7 @@
+*~
+templates/templates_c/*
+templates_c/*
+.buildpath
+.project
+.settings
+/nbproject/private/

@@ -1,0 +1,215 @@
+RewriteEngine On
+RewriteBase /
+
+Options +FollowSymLinks
+Options -Indexes
+ErrorDocument 404 /index.php
+
+# secure login ... 
+AuthType Basic
+Require valid-user
+AuthUserFile /etc/apache2/extra/.htpasswd
+
+<Files ~ "^(.*)\.(inc|tpl|sql)$">
+  Order deny,allow
+  Deny from all
+</Files>
+
+
+<IfModule mod_rewrite.c>
+
+
+RewriteEngine on
+
+RewriteBase /
+
+#Index
+RewriteCond %{REQUEST_URI} /index$
+RewriteRule ^(.*)$ /index.php [L,NC,QSA]
+
+#Login
+RewriteCond %{REQUEST_URI} /login/([^/]+)/([^/]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=login&action=%1&cid=%2 [L,NC,QSA]
+
+#Login
+RewriteCond %{REQUEST_URI} /login/([^/]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=login&action=%1 [L,NC,QSA]
+
+#Login
+RewriteCond %{REQUEST_URI} /login$
+RewriteRule ^(.*)$ /index.php?ctrl=login [L,NC,QSA]
+
+#Login
+RewriteCond %{REQUEST_URI} /login.php/$
+RewriteCond %{REQUEST_URI} /login/$
+RewriteCond %{REQUEST_URI} /login.php$
+RewriteCond %{REQUEST_URI} /login$
+RewriteCond %{REQUEST_URI} !/login-style.css$
+RewriteRule ^(.*)$ /index.php?ctrl=login [L,NC,QSA]
+
+#Signup
+RewriteCond %{REQUEST_URI} /signup$
+RewriteRule ^(.*)$ /index.php?ctrl=signup [L,NC,QSA]
+#Signup
+RewriteCond %{REQUEST_URI} /signup.php$
+RewriteCond %{REQUEST_URI} /signup.php/$
+RewriteCond %{REQUEST_URI} /signup$
+RewriteCond %{REQUEST_URI} /signup/$
+RewriteRule ^(.*)$ /index.php?ctrl=signup [L,NC,QSA]
+ 
+#Profile
+RewriteCond %{REQUEST_URI} /profile$
+RewriteRule ^(.*)$ /index.php?ctrl=profile [L,NC,QSA]
+#Profile
+RewriteCond %{REQUEST_URI} /profile.php$
+RewriteCond %{REQUEST_URI} /profile.php/$
+RewriteCond %{REQUEST_URI} /profile$
+RewriteCond %{REQUEST_URI} /profile/$
+RewriteRule ^(.*)$ /index.php?ctrl=profile [L,NC,QSA]
+
+#Settings
+RewriteCond %{REQUEST_URI} /settings$
+RewriteRule ^(.*)$ /index.php?ctrl=settings [L,NC,QSA]
+#Settings
+RewriteCond %{REQUEST_URI} /settings.php$
+RewriteCond %{REQUEST_URI} /settings.php/$
+RewriteCond %{REQUEST_URI} /settings$
+RewriteCond %{REQUEST_URI} /settings/$
+RewriteRule ^(.*)$ /index.php?ctrl=settings [L,NC,QSA]
+
+#Users
+RewriteCond %{REQUEST_URI} /users/([^/]+)/([0-9]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=users&action=%1&uid=%2 [L,NC,QSA]
+#Users
+RewriteCond %{REQUEST_URI} /users$
+RewriteRule ^(.*)$ /index.php?ctrl=users [L,NC,QSA]
+#Users
+RewriteCond %{REQUEST_URI} /users.php$
+RewriteCond %{REQUEST_URI} /users.php/$
+RewriteCond %{REQUEST_URI} /users$
+RewriteCond %{REQUEST_URI} /users/$
+RewriteRule ^(.*)$ /index.php?ctrl=users [L,NC,QSA]
+
+#Feeds
+RewriteCond %{REQUEST_URI} /feeds$
+RewriteRule ^(.*)$ /index.php?ctrl=feeds [L,NC,QSA]
+#Feeds
+RewriteCond %{REQUEST_URI} /feeds.php$
+RewriteCond %{REQUEST_URI} /feeds.php/$
+RewriteCond %{REQUEST_URI} /feeds$
+RewriteCond %{REQUEST_URI} /feeds/$
+RewriteRule ^(.*)$ /index.php?ctrl=feeds [L,NC,QSA]
+
+#Alarms
+RewriteCond %{REQUEST_URI} /alarms$
+RewriteRule ^(.*)$ /index.php?ctrl=alarms [L,NC,QSA]
+#Alarms
+RewriteCond %{REQUEST_URI} /alarms.php$
+RewriteCond %{REQUEST_URI} /alarms.php/$
+RewriteCond %{REQUEST_URI} /alarms$
+RewriteCond %{REQUEST_URI} /alarms/$
+RewriteRule ^(.*)$ /index.php?ctrl=alarms [L,NC,QSA]
+
+#Keys
+RewriteCond %{REQUEST_URI} /keys$
+RewriteRule ^(.*)$ /index.php?ctrl=keys [L,NC,QSA]
+
+#Keys
+RewriteCond %{REQUEST_URI} /save$
+RewriteRule ^(.*)$ /index.php?ctrl=save [L,NC,QSA]
+
+#Keys
+RewriteCond %{REQUEST_URI} /keys.php$
+RewriteCond %{REQUEST_URI} /keys.php/$
+RewriteCond %{REQUEST_URI} /keys$
+RewriteCond %{REQUEST_URI} /keys/$
+RewriteRule ^(.*)$ /index.php?ctrl=keys [L,NC,QSA]
+
+#Dashboards
+RewriteCond %{REQUEST_URI} /dashboards$
+RewriteRule ^(.*)$ /index.php?ctrl=dashboards [L,NC,QSA]
+#Dashboards
+RewriteCond %{REQUEST_URI} /dashboards.php$
+RewriteCond %{REQUEST_URI} /dashboards.php/$
+RewriteCond %{REQUEST_URI} /dashboards$
+RewriteCond %{REQUEST_URI} /dashboards/$
+RewriteRule ^(.*)$ /index.php?ctrl=dashboards [L,NC,QSA]
+
+#FeedData
+RewriteCond %{REQUEST_URI} /data.php$
+RewriteCond %{REQUEST_URI} /data.php/$
+RewriteCond %{REQUEST_URI} /data$
+RewriteCond %{REQUEST_URI} /data/$
+RewriteRule ^(.*)$ /index.php?ctrl=data [L,NC,QSA]
+
+#API rules
+
+#Feeds
+RewriteCond %{REQUEST_URI} /feeds/new/([0-9]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=feeds&action=_new&feedid=%2 [L,NC,QSA]
+
+RewriteCond %{REQUEST_URI} /feeds/([^/]+)/([0-9]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=feeds&action=%1&feedid=%2 [L,NC,QSA]
+
+#Keys
+RewriteCond %{REQUEST_URI} /keys/new/([0-9]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=keys&action=_new&keyid=%2 [L,NC,QSA]
+
+RewriteCond %{REQUEST_URI} /keys/([^/]+)/([0-9]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=keys&action=%1&keyid=%2 [L,NC,QSA]
+
+#Data requests
+#/dataPull/pull/4/f4ef12415e455b93b4280318f88cbfb60d1d37d0ccdec50dff42cf86958390d8/device1/1/Sensor/sen4/1111111111/1234567899
+RewriteCond %{REQUEST_URI} /dataPull/([^/]+)/([0-9]+)/([^/]+)/([^/]+)/([0-9]+)/([^/]+)/([^/]+)/([0-9]+)/([0-9]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=data&action=%1&feedid=%2&keyhash=%3&deviceName=%4&deviceID=%5&objectType=%6&objectName=%7&tsstart=%8&tsend=%9 [L,NC,QSA]
+
+#/dataExecute/execute/4/f4ef12415e455b93b4280318f88cbfb60d1d37d0ccdec50dff42cf86958390d8
+RewriteCond %{REQUEST_URI} /dataExecute/([^/]+)/([0-9]+)/([^/]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=data&action=%1&feedid=%2&keyhash=%3 [L,NC,QSA]
+
+#/data2/pullFeedGetSensorNames/1/
+RewriteCond %{REQUEST_URI} /data2/([^/]+)/([0-9]+)/$
+RewriteRule ^(.*)$ /index.php?ctrl=data&action=%1&userid=%2 [L,NC,QSA]
+
+#/dataPush/push/4/f4ef12415e455b93b4280318f88cbfb60d1d37d0ccdec50dff42cf86958390d8
+RewriteCond %{REQUEST_URI} /dataPush/([^/]+)/([0-9]+)/([^/]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=data&action=%1&feedid=%2&keyhash=%3 [L,NC,QSA]
+
+#Save
+RewriteCond %{REQUEST_URI} /save/([^/]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=save&what=%1 [L,NC,QSA]
+
+#Dashboards
+RewriteCond %{REQUEST_URI} /dashboards/([^/]+)/([0-9]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=dashboards&action=%1&dashid=%2 [L,NC,QSA]
+
+RewriteCond %{REQUEST_URI} /dashboards/([^/]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=dashboards&action=%1 [L,NC,QSA]
+
+#Editor edit && new
+RewriteCond %{REQUEST_URI} /editor/new$
+RewriteRule ^(.*)$ /index.php?ctrl=editor&action=_new [L,NC,QSA]
+
+RewriteCond %{REQUEST_URI} /editor/edit/([0-9]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=editor&action=edit&dashid=%1 [L,NC,QSA]
+
+RewriteCond %{REQUEST_URI} /editor$
+RewriteRule ^(.*)$ /index.php?ctrl=editor [L,NC,QSA]
+
+#Alarms
+RewriteCond %{REQUEST_URI} /alarms/new/([0-9]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=alarms&action=_new&type=%1 [L,NC,QSA]
+
+RewriteCond %{REQUEST_URI} /alarms/notify/notifySecretKey$
+RewriteRule ^(.*)$ /index.php?ctrl=alarms&action=notify [L,NC,QSA]
+
+RewriteCond %{REQUEST_URI} /alarms/([^/]+)/([0-9]+)$
+RewriteRule ^(.*)$ /index.php?ctrl=alarms&action=%1&faid=%2 [L,NC,QSA]
+
+RewriteCond %{REQUEST_URI} /about$
+RewriteRule ^(.*)$ /index.php?ctrl=about [L,NC,QSA]
+
+RewriteCond %{REQUEST_URI} /contact$
+RewriteRule ^(.*)$ /index.php?ctrl=contact [L,NC,QSA]
+</IfModule>
+

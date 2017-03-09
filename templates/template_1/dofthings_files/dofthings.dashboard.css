@@ -1,0 +1,138 @@
+.device_element2_btn_table {
+	border: 1px solid #FFFFFF; 
+	height: 100%; 
+	width: 100%;
+}
+
+.device_element2_btn_table .device_element2_btn_table_on_notactive {
+	background-color: gray;
+	text-align: center;
+}
+
+.device_element2_btn_table .device_element2_btn_table_off_notactive {
+	background-color: gray;
+	text-align: center;
+}
+
+.device_element2_btn_table .device_element2_btn_table_on {
+	background-color: green;
+	text-align: center;
+}
+
+.device_element2_btn_table .device_element2_btn_table_off {
+	background-color: red;
+	text-align: center;
+}
+
+.device_element1_btn_on_notactive {
+	border: 1px solid #ffffff;
+	background-color: gray;
+	text-align: center;
+}
+
+.device_element1_btn_off_notactive {
+	border: 1px solid #ffffff;
+	background-color: gray;
+	text-align: center;
+}
+
+.device_element1_btn_on {
+	border: 1px solid #ffffff;
+	background-color: green;
+	text-align: center;
+}
+
+.device_element1_btn_off {
+	border: 1px solid #ffffff;
+	background-color: red;
+	text-align: center;
+}
+
+.control_panel_new {
+	background-color: #D4EBFF;
+	font-size: 5px;
+}
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.ui-timepicker-rtl dl dt{ float: right; clear: right; }
+.ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+
+#reset {
+	border: 1px solid #FFFFFF; 
+	width: 100%;
+}
+
+#refresh {
+	border: 1px solid #FFFFFF; 
+	width: 100%;
+}
+
+.flotPanButton {
+	position: absolute;
+	cursor: pointer;
+}
+
+.flotPanButton {
+	font-size: smaller;
+	color: #999;
+	background-color: #eee;
+	padding: 2px;
+}
+
+.flotZoomButton {
+	position: absolute;
+	cursor: pointer;
+}
+
+.flotZoomButton {
+	font-size: smaller;
+	color: #999;
+	background-color: #eee;
+	padding: 2px;
+}
+
+.sensordoor_open {
+	background-image: url("/geditor/images/device_elements/door.open.on.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.sensordoor_close {
+	background-image: url("/geditor/images/device_elements/door.open.off.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.sensorwindow_open {
+	background-image: url("/geditor/images/device_elements/window.open.on.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.sensorwindow_close {
+	background-image: url("/geditor/images/device_elements/window.open.off.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+
+.sensorlamp_open {
+	background-image: url("/geditor/images/device_elements/lamp.turn.on.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.sensorlamp_close {
+	background-image: url("/geditor/images/device_elements/lamp.turn.off.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}

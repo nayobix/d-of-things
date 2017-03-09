@@ -1,0 +1,78 @@
+# System requirements. Install:
+PHP-5.6
+Apache
+Mysql (Use default password: dofthingsd0fth1ngs)
+Mosquitto (MQTT broker)
+MongoDB
+
+# PHP modules. Install:
+pear install Mail-1.2.0
+pear install Net_SMTP
+pear install Auth_SASL
+
+Install packages:
+$ apt-get install php5-dev php5-mysql libmosquitto-dev libmosquitto1 php5-mongo php5-curl
+$ pecl install Mosquitto-alpha
+
+# Add extension=mosquitto.so to /etc/php5/apache2/php.ini
+$ echo "extension=mosquitto.so" >> /etc/php5/apache2/php.ini
+
+# Install crontab -e
+$ cat install.d/crontab/crontab
+
+# Install mosquitto configs from install.d/configs/mosquitto/*
+$ cp /var/www/html/d-of-things/install.d/configs/mosquitto/mosquitto.* /etc/mosquitto/conf.d
+
+# Create random password for every user in mosquitto.passwd.conf <choose password>
+$ date +%s | sha256sum | base64 | head -c 32 ; echo
+Mjg4MzY5YjIxZGZmYmZiNzYxM2Y1ODQx
+$ mosquitto_passwd /etc/mosquitto/conf.d/mosquitto.passwd.conf userroall
+Passwd:
+
+After the installation of the above components then lets configure:
+
+# dofthings configuration
+
+1) git clone github project into /var/www/[htdocs|html] directory or where
+   Apache has access
+
+2) Configure your apache2 server /etc/apache to point to dofthings git
+   /var/www/[htdocs|html]/d-of-things. Check install.d/configs/apache
+
+2) Import sql/dofthings.sql to your mysql instance
+   mysql -u root -p < install.d/configs/sql/dofthings.sql # Password default: dofthingsd0fth1ngs
+
+3) mkdir /var/www/[htdocs|html]/d-of-things/templates_c # It's Smarty caching dir
+   chown www-data.www-data templates_c
+
+4) Configure mosquitto from install.d/configs/mosquitto
+   $ cp install.d/configs/mosquitto/passwd /etc/mosquitto
+   $ cp install.d/configs/mosquitto/acl.conf /etc/mosquitto
+   $ cp install.d/configs/mosquitto/conf.d/noanonymous.conf /etc/mosquitto/conf.d
+   $ cp install.d/configs/mosquitto/conf.d/websocket.conf /etc/mosquitto/conf.d
+   $ cp <your-cert-file>.crt /etc/mosquitto/certs/dofthings.crt
+   $ cp <your-key-file>.key /etc/mosquitto/certs/dofthings.key
+
+5) Try to login http://localhost
+6) Default username/password: admin/admin
+7) Go to Admin->Settings and change your settings appropriately to match your
+   environment.
+
+   7.1) Configure `Site URL` field http[s]://<your-hostname>:<port>/
+   7.2) Configure `Other Credentials` field for
+   mqtt host/port and user/pass:
+   {
+   "mqqtServerMiddlerwareSubscribe":
+      {"hostname":"localhost","port":1883,"user":"dofthings_middleware","pass":"password"},
+   "mqttServerSendAction":
+      {"hostname":"localhost","port":1883,"user":"dofthings_server","pass":"password"},
+   "mqttSendHTTP":
+      {"hostname":"dofthings.org","port":443,"user":"username","pass":"password"}
+      }
+
+   7.3) Click Save on bottom of the page
+
+7) Try to reload http://<your-hostname>:<port>/
+
+8) If there are messages in MQTT broker which you want to redirect, then
+   check scripts/middleware/mqtt_to_http.config
